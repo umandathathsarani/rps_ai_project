@@ -9,16 +9,20 @@ class RPSGame:
         self.scoreboard = ScoreBoard()
         self.root = root
         self.root.title("RPS AI Game")
+        self.root.geometry("250x280")
 
         self.label = tk.Label(root, text="Choose your move!")
-        self.label.pack()
+        self.label.pack(pady=(10, 5))
 
         for move in ['rock', 'paper', 'scissors']:
-            btn = tk.Button(root, text=move.capitalize(), command=lambda m=move: self.play(m))
-            btn.pack()
+            btn = tk.Button(root, text=move.capitalize(), width=10, command=lambda m=move: self.play(m))
+            btn.pack(pady=2)
 
         self.score_label = tk.Label(root, text="Score - Player: 0 | AI: 0 | Ties: 0")
-        self.score_label.pack()
+        self.score_label.pack(pady=(15, 5))
+
+        self.refresh_btn = tk.Button(root, text="Refresh Score", command=self.reset_scores)
+        self.refresh_btn.pack(pady=5)
 
     def play(self, player_move):
         ai_move = self.ai.get_move()
@@ -33,6 +37,12 @@ class RPSGame:
         if p == a: return "tie"
         if (p=='rock' and a=='scissors') or (p=='paper' and a=='rock') or (p=='scissors' and a=='paper'): return "player"
         return "ai"
+
+    def reset_scores(self):
+        self.scoreboard.player_wins = 0
+        self.scoreboard.ai_wins = 0
+        self.scoreboard.ties = 0
+        self.score_label.config(text="Score - Player: 0 | AI: 0 | Ties: 0")
 
 if __name__ == "__main__":
     root = tk.Tk()
