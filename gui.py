@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import messagebox
 from ai import SimpleAI
 from score import ScoreBoard
+import math
 
 class RPSGame:
     def __init__(self, root):
@@ -60,7 +61,8 @@ class RPSGame:
         self.ai.update_history(player_move)
         
         self.score_label.config(text=f"Score - Player: {self.scoreboard.player_wins} | AI: {self.scoreboard.ai_wins} | Ties: {self.scoreboard.ties}")
-        messagebox.showinfo("Result", f"AI chose: {ai_move}\nResult: {winner}")
+        
+        self.show_custom_result_popup(ai_move, winner)
 
     def determine_winner(self, p, a):
         if p == a: return "tie"
@@ -72,6 +74,55 @@ class RPSGame:
         self.scoreboard.ai_wins = 0
         self.scoreboard.ties = 0
         self.score_label.config(text="Score - Player: 0 | AI: 0 | Ties: 0")
+
+    def show_custom_result_popup(self, ai_move, winner):
+        popup = tk.Toplevel(self.root)
+        popup.title("Game Outcome")
+        popup.configure(bg="#2C3E50")
+        popup.resizable(False, False)
+        
+        popup_width = 200
+        popup_height = 150
+        x = self.root.winfo_x() + (self.root.winfo_width() - popup_width) // 2
+        y = self.root.winfo_y() + (self.root.winfo_height() - popup_height) // 2
+        popup.geometry(f"{popup_width}x{popup_height}+{math.floor(x)}+{math.floor(y)}")
+
+        popup.grab_set() 
+        popup.transient(self.root) 
+
+        title_label = tk.Label(
+            popup, 
+            text="Round Complete", 
+            bg="#2C3E50", 
+            fg="#ECF0F1", 
+            font=("Segoe UI", 12, "bold")
+        )
+        title_label.pack(pady=(15, 5))
+        
+        info_text = f"AI chose: {ai_move}\nResult: {winner}"
+        info_label = tk.Label(
+            popup, 
+            text=info_text, 
+            bg="#2C3E50", 
+            fg="#ECF0F1", 
+            font=("Segoe UI", 10),
+            justify="center" 
+        )
+        info_label.pack(pady=5)
+
+        ok_btn = tk.Button(
+            popup, 
+            text="OK", 
+            width=10,
+            bg="#34495E", 
+            fg="#ECF0F1", 
+            activebackground="#2980B9", 
+            activeforeground="#ECF0F1", 
+            relief="flat", 
+            font=("Segoe UI", 10), 
+            command=popup.destroy 
+        )
+        ok_btn.pack(pady=(10, 15))
 
 if __name__ == "__main__":
     root = tk.Tk()
