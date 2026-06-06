@@ -1,3 +1,7 @@
 __pycache__/
 *.pyc
 .vscode/
+build/
+dist/
+*.spec
+ai_memory.json
