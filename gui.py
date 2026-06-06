@@ -11,9 +11,9 @@ class RPSGame:
         self.root = root
         self.root.title("RPS AI Game")
         self.root.geometry("300x350")
-        self.root.configure(bg="#F4EFE6")
+        self.root.configure(bg="#000000")
 
-        self.label = tk.Label(root, text="Choose your move!", bg="#F4EFE6", fg="#3E2723", font=("Georgia", 14, "bold"))
+        self.label = tk.Label(root, text="Choose your move!", bg="#000000", fg="#E1DCC9", font=("Segoe UI", 14, "bold"))
         self.label.pack(pady=(20, 15))
 
         for move in ['rock', 'paper', 'scissors']:
@@ -21,12 +21,12 @@ class RPSGame:
                 root, 
                 text=move.capitalize(), 
                 width=15, 
-                bg="#D4A373", 
-                fg="#3E2723", 
-                activebackground="#E9C46A", 
-                activeforeground="#3E2723", 
+                bg="#E1DCC9", 
+                fg="#000000", 
+                activebackground="#412D15", 
+                activeforeground="#E1DCC9", 
                 relief="flat", 
-                font=("Georgia", 12, "bold"), 
+                font=("Segoe UI", 12, "bold"), 
                 command=lambda m=move: self.play(m)
             )
             btn.pack(pady=6)
@@ -34,9 +34,9 @@ class RPSGame:
         self.score_label = tk.Label(
             root, 
             text="Score - Player: 0 | AI: 0 | Ties: 0", 
-            bg="#F4EFE6", 
-            fg="#8D6E63", 
-            font=("Georgia", 12, "bold")
+            bg="#000000", 
+            fg="#E1DCC9", 
+            font=("Segoe UI", 12, "bold")
         )
         self.score_label.pack(pady=(25, 10))
 
@@ -44,12 +44,12 @@ class RPSGame:
             root, 
             text="Refresh Score", 
             width=15, 
-            bg="#A3B18A", 
-            fg="#3E2723", 
-            activebackground="#C2C5AA", 
-            activeforeground="#3E2723", 
+            bg="#E1DCC9", 
+            fg="#000000", 
+            activebackground="#1F150C", 
+            activeforeground="#E1DCC9", 
             relief="flat", 
-            font=("Georgia", 10, "bold"), 
+            font=("Segoe UI", 10, "bold"), 
             command=self.reset_scores
         )
         self.refresh_btn.pack(pady=5)
@@ -77,7 +77,7 @@ class RPSGame:
     def show_custom_result_popup(self, ai_move, winner):
         popup = tk.Toplevel(self.root)
         popup.title("Game Outcome")
-        popup.configure(bg="#F4EFE6")
+        popup.configure(bg="#1F150C")
         popup.resizable(False, False)
         
         popup_width = 200
@@ -92,9 +92,9 @@ class RPSGame:
         title_label = tk.Label(
             popup, 
             text="Round Complete", 
-            bg="#F4EFE6", 
-            fg="#3E2723", 
-            font=("Georgia", 12, "bold")
+            bg="#1F150C", 
+            fg="#E1DCC9", 
+            font=("Segoe UI", 12, "bold")
         )
         title_label.pack(pady=(15, 5))
         
@@ -102,9 +102,9 @@ class RPSGame:
         info_label = tk.Label(
             popup, 
             text=info_text, 
-            bg="#F4EFE6", 
-            fg="#3E2723", 
-            font=("Georgia", 10, "bold"),
+            bg="#1F150C", 
+            fg="#E1DCC9", 
+            font=("Segoe UI", 10, "bold"),
             justify="center"
         )
         info_label.pack(pady=5)
@@ -113,12 +113,12 @@ class RPSGame:
             popup, 
             text="OK", 
             width=10,
-            bg="#A3B18A", 
-            fg="#3E2723", 
-            activebackground="#C2C5AA", 
-            activeforeground="#3E2723", 
+            bg="#E1DCC9", 
+            fg="#1F150C", 
+            activebackground="#412D15", 
+            activeforeground="#E1DCC9", 
             relief="flat", 
-            font=("Georgia", 10, "bold"), 
+            font=("Segoe UI", 10, "bold"), 
             command=popup.destroy
         )
         ok_btn.pack(pady=(10, 15))
