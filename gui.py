@@ -11,9 +11,9 @@ class RPSGame:
         self.root = root
         self.root.title("RPS AI Game")
         self.root.geometry("300x350")
-        self.root.configure(bg="#2C3E50")
+        self.root.configure(bg="#1A1A1A")
 
-        self.label = tk.Label(root, text="Choose your move!", bg="#2C3E50", fg="#ECF0F1", font=("Segoe UI", 14, "bold"))
+        self.label = tk.Label(root, text="Choose your move!", bg="#1A1A1A", fg="#FF3333", font=("Segoe UI", 14, "bold"))
         self.label.pack(pady=(20, 15))
 
         for move in ['rock', 'paper', 'scissors']:
@@ -21,12 +21,12 @@ class RPSGame:
                 root, 
                 text=move.capitalize(), 
                 width=15, 
-                bg="#34495E", 
-                fg="#ECF0F1", 
-                activebackground="#2980B9", 
-                activeforeground="#ECF0F1", 
+                bg="#E60000", 
+                fg="#FFFFFF", 
+                activebackground="#990000", 
+                activeforeground="#FFFFFF", 
                 relief="flat", 
-                font=("Segoe UI", 12), 
+                font=("Segoe UI", 12, "bold"), 
                 command=lambda m=move: self.play(m)
             )
             btn.pack(pady=6)
@@ -34,8 +34,8 @@ class RPSGame:
         self.score_label = tk.Label(
             root, 
             text="Score - Player: 0 | AI: 0 | Ties: 0", 
-            bg="#2C3E50", 
-            fg="#F1C40F", 
+            bg="#1A1A1A", 
+            fg="#39FF14", 
             font=("Segoe UI", 12, "bold")
         )
         self.score_label.pack(pady=(25, 10))
@@ -44,10 +44,10 @@ class RPSGame:
             root, 
             text="Refresh Score", 
             width=15, 
-            bg="#E74C3C", 
-            fg="#ECF0F1", 
-            activebackground="#C0392B", 
-            activeforeground="#ECF0F1", 
+            bg="#00CC00", 
+            fg="#000000", 
+            activebackground="#009900", 
+            activeforeground="#000000", 
             relief="flat", 
             font=("Segoe UI", 10, "bold"), 
             command=self.reset_scores
@@ -61,7 +61,6 @@ class RPSGame:
         self.ai.update_history(player_move)
         
         self.score_label.config(text=f"Score - Player: {self.scoreboard.player_wins} | AI: {self.scoreboard.ai_wins} | Ties: {self.scoreboard.ties}")
-        
         self.show_custom_result_popup(ai_move, winner)
 
     def determine_winner(self, p, a):
@@ -78,7 +77,7 @@ class RPSGame:
     def show_custom_result_popup(self, ai_move, winner):
         popup = tk.Toplevel(self.root)
         popup.title("Game Outcome")
-        popup.configure(bg="#2C3E50")
+        popup.configure(bg="#E60000")
         popup.resizable(False, False)
         
         popup_width = 200
@@ -86,15 +85,15 @@ class RPSGame:
         x = self.root.winfo_x() + (self.root.winfo_width() - popup_width) // 2
         y = self.root.winfo_y() + (self.root.winfo_height() - popup_height) // 2
         popup.geometry(f"{popup_width}x{popup_height}+{math.floor(x)}+{math.floor(y)}")
-
+        
         popup.grab_set() 
-        popup.transient(self.root) 
+        popup.transient(self.root)
 
         title_label = tk.Label(
             popup, 
             text="Round Complete", 
-            bg="#2C3E50", 
-            fg="#ECF0F1", 
+            bg="#E60000", 
+            fg="#FFFFFF", 
             font=("Segoe UI", 12, "bold")
         )
         title_label.pack(pady=(15, 5))
@@ -103,10 +102,10 @@ class RPSGame:
         info_label = tk.Label(
             popup, 
             text=info_text, 
-            bg="#2C3E50", 
-            fg="#ECF0F1", 
-            font=("Segoe UI", 10),
-            justify="center" 
+            bg="#E60000", 
+            fg="#FFFFFF", 
+            font=("Segoe UI", 10, "bold"),
+            justify="center"
         )
         info_label.pack(pady=5)
 
@@ -114,13 +113,13 @@ class RPSGame:
             popup, 
             text="OK", 
             width=10,
-            bg="#34495E", 
-            fg="#ECF0F1", 
-            activebackground="#2980B9", 
-            activeforeground="#ECF0F1", 
+            bg="#00CC00", 
+            fg="#000000", 
+            activebackground="#009900", 
+            activeforeground="#000000", 
             relief="flat", 
-            font=("Segoe UI", 10), 
-            command=popup.destroy 
+            font=("Segoe UI", 10, "bold"), 
+            command=popup.destroy
         )
         ok_btn.pack(pady=(10, 15))
 
