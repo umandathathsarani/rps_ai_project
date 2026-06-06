@@ -2,23 +2,31 @@ import random
 
 class SimpleAI:
     def __init__(self):
-        self.player_history = {'rock': 0, 'paper': 0, 'scissors': 0}
+        self.transitions = {
+            'rock': {'rock': 0, 'paper': 0, 'scissors': 0},
+            'paper': {'rock': 0, 'paper': 0, 'scissors': 0},
+            'scissors': {'rock': 0, 'paper': 0, 'scissors': 0}
+        }
+        self.last_move = None
 
     def get_move(self):
-        total_moves = sum(self.player_history.values())
-        
-        if total_moves == 0:
+        if self.last_move is None:
             return random.choice(['rock', 'paper', 'scissors'])
 
-        most_frequent_move = max(self.player_history, key=self.player_history.get)
+        counts = self.transitions[self.last_move]
+        predicted_next = max(counts, key=counts.get)
+        
+        if counts[predicted_next] == 0:
+            return random.choice(['rock', 'paper', 'scissors'])
 
-        if most_frequent_move == 'rock':
+        if predicted_next == 'rock':
             return 'paper'
-        elif most_frequent_move == 'paper':
+        elif predicted_next == 'paper':
             return 'scissors'
         else:
             return 'rock'
 
     def update_history(self, player_move):
-        if player_move in self.player_history:
-            self.player_history[player_move] += 1
+        if self.last_move:
+            self.transitions[self.last_move][player_move] += 1
+        self.last_move = player_move
