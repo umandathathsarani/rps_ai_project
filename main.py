@@ -1,4 +1,5 @@
 from ai import SimpleAI
+from score import ScoreBoard
 
 def determine_winner(player_move, ai_move):
     if player_move == ai_move:
@@ -12,6 +13,7 @@ def determine_winner(player_move, ai_move):
 
 def play_game():
     ai = SimpleAI()
+    scoreboard = ScoreBoard()
     valid_moves = ['rock', 'paper', 'scissors']
 
     print("Welcome to Rock-Paper-Scissors AI!")
@@ -20,6 +22,8 @@ def play_game():
         player_move = input("Enter rock, paper, or scissors (or 'quit'): ").lower()
 
         if player_move == 'quit':
+            print("Final Score:")
+            scoreboard.display_score()
             print("Thanks for playing!")
             break
 
@@ -39,6 +43,9 @@ def play_game():
         else:
             print("AI wins!")
 
+        scoreboard.record_win(winner)
+        scoreboard.display_score()
+        
         ai.update_history(player_move)
         print("-" * 20)
 
