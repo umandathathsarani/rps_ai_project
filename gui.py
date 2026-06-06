@@ -9,19 +9,48 @@ class RPSGame:
         self.scoreboard = ScoreBoard()
         self.root = root
         self.root.title("RPS AI Game")
-        self.root.geometry("250x280")
+        self.root.geometry("300x350")
+        self.root.configure(bg="#2C3E50")
 
-        self.label = tk.Label(root, text="Choose your move!")
-        self.label.pack(pady=(10, 5))
+        self.label = tk.Label(root, text="Choose your move!", bg="#2C3E50", fg="#ECF0F1", font=("Segoe UI", 14, "bold"))
+        self.label.pack(pady=(20, 15))
 
         for move in ['rock', 'paper', 'scissors']:
-            btn = tk.Button(root, text=move.capitalize(), width=10, command=lambda m=move: self.play(m))
-            btn.pack(pady=2)
+            btn = tk.Button(
+                root, 
+                text=move.capitalize(), 
+                width=15, 
+                bg="#34495E", 
+                fg="#ECF0F1", 
+                activebackground="#2980B9", 
+                activeforeground="#ECF0F1", 
+                relief="flat", 
+                font=("Segoe UI", 12), 
+                command=lambda m=move: self.play(m)
+            )
+            btn.pack(pady=6)
 
-        self.score_label = tk.Label(root, text="Score - Player: 0 | AI: 0 | Ties: 0")
-        self.score_label.pack(pady=(15, 5))
+        self.score_label = tk.Label(
+            root, 
+            text="Score - Player: 0 | AI: 0 | Ties: 0", 
+            bg="#2C3E50", 
+            fg="#F1C40F", 
+            font=("Segoe UI", 12, "bold")
+        )
+        self.score_label.pack(pady=(25, 10))
 
-        self.refresh_btn = tk.Button(root, text="Refresh Score", command=self.reset_scores)
+        self.refresh_btn = tk.Button(
+            root, 
+            text="Refresh Score", 
+            width=15, 
+            bg="#E74C3C", 
+            fg="#ECF0F1", 
+            activebackground="#C0392B", 
+            activeforeground="#ECF0F1", 
+            relief="flat", 
+            font=("Segoe UI", 10, "bold"), 
+            command=self.reset_scores
+        )
         self.refresh_btn.pack(pady=5)
 
     def play(self, player_move):
